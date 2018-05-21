@@ -13,6 +13,7 @@ import Experiences from './components/Experiences';
 import Featured from './components/Featured';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Post from './components/Post';
 
 export default class App extends Component {
 
@@ -32,6 +33,7 @@ export default class App extends Component {
           {/* <Route patch="/experiences/:name" component={Featured} /> */}
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
+          <Route path="/post" component={Post} />
         </Switch>
       </div>
     </BrowserRouter>
