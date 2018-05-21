@@ -35,10 +35,13 @@ class Login extends Component {
       // console.log('user id what: ', user);
       // console.log('user id what: ', user.headers.authorization);
       console.log('user id what: ', response.headers.get("Authorization"));
+
+      // remembers for client-side the authorization header
+      localStorage.setItem("user", response.headers.get("Authorization"));
+      console.log('this.props.history is what: ', this.props.history);
+      this.props.history.push("/experiences")
     }
   }
-
-  // localStorage here
 
   render() {
     return (
