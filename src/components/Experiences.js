@@ -16,10 +16,29 @@ import {
   Col,
   Button
 } from 'reactstrap';
+import ExperienceCard from './ExperienceCard';
 
 class Experiences extends Component {
 
+  state = {
+    experiences: [
+      {imageUrl: ''}
+    ]
+  }
+
+  componentWillMount = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/experience`) 
+    // console.log('Whats response in componenWillMount: ', response)
+    const responseJson = await response.json()
+    console.log('Whats responseJson: ', responseJson);
+    this.setState({experiences: responseJson.result})
+  }
+  
+
   render() {
+    // console.log('Whats this.state now: ', this.state.experience[0]);
+    // let {imageUrl} = this.state.experience;
+
     return (
       <div>
         <Jumbotron>
@@ -29,60 +48,13 @@ class Experiences extends Component {
             <Col sm={10}>
             <Input className="mr-2"type="search" name="search" id="search" placeholder="Search your next social impact experience..." />
             </Col>
-            <Button >Submit</Button>
+            <Button>Submit</Button>
           </FormGroup>
         </Jumbotron>
         <Row>
-          <Col sm="4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
-          <Col sm="4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
-          <Col sm="4" className="mb-4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm="4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
-          <Col sm="4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
-          <Col sm="4">
-            <Card body>
-              <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-              <CardTitle>Experience Name</CardTitle>
-              <CardText>What services they provide and how they're impactful.</CardText>
-              <Button>Learn more</Button>
-            </Card>
-          </Col>
+          {this.state.experiences.map(experience => {
+            return <ExperienceCard imageUrl={experience.imageUrl} name={experience.name} description={experience.description}/>
+          })}
         </Row>
       </div>
     )

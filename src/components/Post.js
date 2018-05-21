@@ -6,60 +6,76 @@ import {
   Label,
   Input
  } from 'reactstrap';
+import decode from 'jwt-decode';
 
 class Post extends Component {
 
   state = {
-      name: '',
-      address: '',
-      description: '',
-      url: '',
-      imageUrl: '',
-      city: '',
-      latitude: '',
-      longitude: ''
+    user_id: '',
+    name: '',
+    address: '',
+    description: '',
+    url: '',
+    imageUrl: '',
+    city: '',
+    latitude: '',
+    longitude: ''
   }
 
   handleSubmit = async (e) => {
     e.preventDefault()
     // console.log(this.state.username, this.state.email, this.state.password)
-    if (!this.state.name || !this.state.address || !this.state.description || !this.state.url || !this.state.imageUrl) {
+    if (!this.state.name || !this.state.description || !this.state.url || !this.state.imageUrl) {
       alert('All field must be filled')
     } else {
+      let googleResponse = await fetch(`${process.env.REACT_APP_GOOGLE_GEOLOCATE_API}?address=${this.state.name}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+
+      // console.log('whats response for fetch location: ', await googleResponse.json());
+
+      let result = await googleResponse.json()
+      let token = localStorage.getItem("user")
+
+      this.setState({
+        user_id: decode(token).sub.id,
+        address: result.results[0].formatted_address,
+        city: result.results[0].address_components.filter(component => component.types[0] === 'locality')[0].long_name,
+        latitude: result.results[0].geometry.location.lat,
+        longitude: result.results[0].geometry.location.lng
+      })
+
+      console.log('these are the states of each state ', this.state);
+      console.log('result ', result);
+
       const response = await fetch(`${process.env.REACT_APP_API_URL}/experience`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": token
         },
-        body: JSON.stringify({
-          name: this.state.name,
-          address: this.state.address,
-          description: this.state.description,
-          url: this.state.url,
-          imageUrl: this.state.imageUrl
-        })
+        body: JSON.stringify(this.state)
       })
     }
   }
 
-  handleFetchLocation = async (e) => {
-    let response = await fetch(`${process.env.REACT_APP_GOOGLE_GEOLOCATE_API}?address=${this.state.name}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+  // handleFetchLocation = async (e) => {
+  //   let response = await fetch(`${process.env.REACT_APP_GOOGLE_GEOLOCATE_API}?address=${this.state.name}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
 
-    console.log('whats response for fetch location: ', await response.json());
+  //   console.log('whats response for fetch location: ', await response.json());
 
-    let result = await response.json()
+  //   let result = await response.json()
 
-    this.setState({
-      address: result[0].formatted_address,
-      city: result[0].locality,
-      latitude: result[0].geometry.location.lat,
-      longitude: result[0].geometry.location.lng
-    })
+  //   this.setState({
+  //     address: result[0].formatted_address,
+  //     city: result[0].locality,
+  //     latitude: result[0].geometry.location.lat,
+  //     longitude: result[0].geometry.location.lng
+  //   })
 
-    // https://maps.googleapis.com/maps/api/geocode/json?address=1951+Cafe&key=AIzaSyCQ4M58brpwEqpG12LuZRjPBu45zROgKnk
+  //   // https://maps.googleapis.com/maps/api/geocode/json?address=1951+Cafe&key=AIzaSyCQ4M58brpwEqpG12LuZRjPBu45zROgKnk
 
-    // https://maps.googleapis.com/maps/api/geocode/json?address=[TYPED IN FROM SEARCH BAR]&key=AIzaSyCQ4M58brpwEqpG12LuZRjPBu45zROgKnk
-  }
+  //   // https://maps.googleapis.com/maps/api/geocode/json?address=[TYPED IN FROM SEARCH BAR]&key=AIzaSyCQ4M58brpwEqpG12LuZRjPBu45zROgKnk
+  // }
 
   render() {
     return (
@@ -71,7 +87,7 @@ class Post extends Component {
               <Label for="name">Location Name</Label>
               <Input 
                 onChange={e => this.setState({ name: e.target.value })}
-                onChange={this.handleFetchLocation}
+                // onBlur={this.handleFetchLocation}
                 type="name"
                 name="name"
                 id="name"
