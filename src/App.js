@@ -11,8 +11,15 @@ import Home from './components/Home';
 import About from './components/About';
 import Experiences from './components/Experiences';
 import Featured from './components/Featured';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 export default class App extends Component {
+
+  // componenWillMount()
+  // Fetch for getAlls
+  // When user logs in, always check with componentWillMount() in localStorage
+
   render() {
     return (
     <BrowserRouter>
@@ -22,7 +29,9 @@ export default class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/experiences" component={Experiences} />
-          <Route patch="/experiences/:name" component={Featured} />
+          {/* <Route patch="/experiences/:name" component={Featured} /> */}
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     </BrowserRouter>
