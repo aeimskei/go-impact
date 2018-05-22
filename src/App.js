@@ -28,12 +28,12 @@ export default class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/experiences" component={Experiences} />
-          {/* <Route patch="/experiences/:name" component={Featured} /> */}
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/post" component={Post} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/experiences" component={Experiences} />
+          <Route exact path="/experiences/:id" component={Featured} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/post" component={Post} />
         </Switch>
       </div>
     </BrowserRouter>

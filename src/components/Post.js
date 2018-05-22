@@ -55,6 +55,7 @@ class Post extends Component {
         },
         body: JSON.stringify(this.state)
       })
+    this.props.history.push("/experiences")
     }
   }
 

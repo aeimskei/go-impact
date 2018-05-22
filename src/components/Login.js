@@ -39,7 +39,11 @@ class Login extends Component {
       // remembers for client-side the authorization header
       localStorage.setItem("user", response.headers.get("Authorization"));
       console.log('this.props.history is what: ', this.props.history);
-      this.props.history.push("/experiences")
+
+      const responseExperience = await fetch(`${process.env.REACT_APP_API_URL}/experience`)
+      // console.log('Whats response in componenWillMount: ', response)
+      const experiences = await responseExperience.json()
+      this.props.history.push("/experiences", experiences)
     }
   }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Button,
   Card,
@@ -9,15 +9,49 @@ import {
   Col,
 } from 'reactstrap';
 
-const ExperienceCard = props => (
-  <Col sm="4">
-    <Card body>
-      <img width="100%" src={props.imageUrl} alt="Image of Location" />
-      <CardTitle>{props.name}</CardTitle>
-      <CardText>{props.description}</CardText>
-      <Button>Learn more</Button>
-    </Card>
-  </Col>
-)
+class ExperienceCard extends Component {
+
+  state = {
+    name: '',
+    imageUrl: '',
+    description: '',
+    url: ''
+  }
+
+  componentWillMount = () => {
+    console.log('Whats being logged out for this.props in expCard', this.props);
+    
+  }
+
+  handleLearnMore = async (e) => {
+    const {id} = this.props.experience
+    let experienceId = await fetch(`${process.env.REACT_APP_API_URL}/experience/${id}`)
+    let responseJson = await experienceId.json()
+    let {result} = responseJson
+    let [experience] = result
+    console.log('handleLearnMore: ', responseJson)
+    console.log(experience);
+
+    this.props.history.push(`/experiences/${id}`, experience)
+  }
+
+  render() {
+
+    const {imageUrl, name, description, url} = this.props.experience
+    return (
+    <Col sm="4">
+      <Card body>
+        <img width="100%" src={imageUrl} alt="Image of Location" />
+        <CardTitle>{name}</CardTitle>
+        <CardText>{description}</CardText>
+        <Button onClick={this.handleLearnMore}>Learn more</Button>
+      </Card>
+    </Col>
+    )
+  }
+
+
+}
+
 
 export default ExperienceCard;
