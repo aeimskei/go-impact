@@ -39,7 +39,7 @@ class ExperienceCard extends Component {
 
     const {imageUrl, name, description, url} = this.props.experience
     return (
-    <Col sm="4">
+    <Col sm="4" className="mb-3">
       <Card body>
         <img width="100%" src={imageUrl} alt="Image of Location" />
         <CardTitle>{name}</CardTitle>

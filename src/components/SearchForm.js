@@ -35,7 +35,7 @@ class SearchForm extends Component {
         <FormGroup row>
           <Label for="search"></Label>
           <Col sm={10}>
-          <Input onChange={this.onSearchChange} className="mr-2"type="search" name="search" id="search" placeholder="Search your next social impact experience..." />
+          <Input onChange={this.onSearchChange} className="mr-2" type="search" name="search" id="search" placeholder="Search your next social impact experience..." />
           </Col>
           <Button>Submit</Button>
         </FormGroup>
