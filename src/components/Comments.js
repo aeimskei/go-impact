@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+  Container,
   Label, 
   Input, 
   Form, 
@@ -76,26 +77,32 @@ class Comments extends Component {
     return (
       // need a form component to allow user to input comment
       <div>
-        <Row>
-          <Col>
+        <Container>
+          <h1 className="display-5">Comment</h1>
           <Form onSubmit={this.handleCommentSubmit}>
             <FormGroup>
-              <Label for="comment">Comment about this experience</Label>
+              <Label for="comment"></Label>
+              <Row>
+              <Col sm={11}>
               <Input onChange={e => this.setState({ comment: e.target.value })} type="text" name="comment" id="comment" placeholder="Enter a comment here" value={this.state.comment}/>
+              </Col>
+              <Button>Submit</Button>
+              </Row>
             </FormGroup>
-            <Button>Submit</Button>
           </Form>
-          <ListGroup>
-            <ListGroupItem>
-            <ul>
-              {this.state.comments.map(comment => {
-                return <li key={comment.id}>{comment.comment}</li>
-              })}
-            </ul>
-            </ListGroupItem>
-          </ListGroup>
-        </Col>
-        </Row>
+        <ListGroup>
+          {/* <ListGroupItem>
+          <ul>
+            {this.state.comments.map(comment => {
+              return <li key={comment.id}>{comment.comment}</li>
+            })}
+          </ul>
+          </ListGroupItem> */}
+            {this.state.comments.map(comment => {
+              return <ListGroupItem key={comment.id}>{comment.comment} </ListGroupItem>
+            })}
+        </ListGroup>
+        </Container>
       </div>
     )
   }
