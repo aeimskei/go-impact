@@ -43,7 +43,8 @@ class Login extends Component {
       const responseExperience = await fetch(`${process.env.REACT_APP_API_URL}/experience`)
       // console.log('Whats response in componenWillMount: ', response)
       const experiences = await responseExperience.json()
-      this.props.history.push("/experiences", experiences)
+      // this.props.history.push("/experiences", experiences)
+      this.props.history.push("/")
     }
   }
 

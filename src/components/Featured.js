@@ -6,6 +6,7 @@ import {
   Col,
   Button} from 'reactstrap';
 import Comments from './Comments';
+import LocationMap from './LocationMap';
 
 
 class Featured extends Component {
@@ -32,26 +33,35 @@ class Featured extends Component {
 
     console.log('this.props in Feature: ', this.props);
     
-    const {id, name, imageUrl, description, url, city} = this.props.history.location.state
+    const {id, name, imageUrl, description, url, address, latitude, longitude} = this.props.history.location.state
 
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron fluid>
           <Container>
-          <h1 className="display-3">More about this experience</h1>
+          <h1 className="display-4">Their Social Impact Story</h1>
+          <p className="lead">Empowering and inspiring.</p>
           </Container>
         </Jumbotron>
-        <Container>
+        <Container style={{ padding: "30px"}}>
           <Row>
-            <Col>
-              <img src="http://www.spur.org/sites/default/files/wysiwyg/20-san%20francisco%20zoom%2012%202009_0.jpg" width="100%" />
-              <p>{city}</p>
+            <Col lg={5}>
+              <img width="100%" style={{ marginBottom: "20px"}} src={imageUrl} alt="Image of Location" />
             </Col>
+            <br />
             <Col>
-              <img width="100%" src={imageUrl} alt="Image of Location" />
               <h1>{name}</h1>
+              <p>{address}</p>
               <p>{description}</p>
               <a href={url}>Website</a>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+            <div style={{width:"400px", height:"250px"}}>
+              <LocationMap fluid name={name} latitude={latitude} longitude={longitude}/>
+            </div>
             </Col>
           </Row>
           <Row>

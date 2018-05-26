@@ -27,14 +27,22 @@ class Experiences extends Component {
   }
   
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     // const response = await fetch(`${process.env.REACT_APP_API_URL}/experience`) 
     // // console.log('Whats response in componenWillMount: ', response)
     // const responseJson = await response.json()
     // console.log('Whats responseJson: ', responseJson);
+
+    const responseExperience = await fetch(`${process.env.REACT_APP_API_URL}/experience`)
+    // console.log('Whats response in componenWillMount: ', response)
+    const experiences = await responseExperience.json()
+
+    console.log('experiences is: ', experiences);
+    
     
     this.setState({
-      experiences: this.props.history.location.state.result
+      // experiences: this.props.history.location.state.result
+      experiences: experiences.result
     })
   }
 
@@ -56,15 +64,16 @@ class Experiences extends Component {
     
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron fluid>
           <Container>
-            <h1 className="display-3">Experiences</h1>
+            <h1 className="display-4">Explore</h1>
+            <p className="lead">Check out some locations that people have posted about.</p>
             <FormGroup row>
               <Label for="search"></Label>
-              <Col sm={10}>
-              <Input onChange={this.onSearchChange} className="mr-2"type="search" name="search" id="search" placeholder="Search your next social impact experience..." />
+              <Col>
+              <Input onChange={this.onSearchChange} type="search" name="search" id="search" placeholder="Search by city..." />
               </Col>
-              <Button>Submit</Button>
+              <Button className="mr-3">Submit</Button>
             </FormGroup>
           </Container>
         </Jumbotron>

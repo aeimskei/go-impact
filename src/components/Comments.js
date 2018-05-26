@@ -74,20 +74,18 @@ class Comments extends Component {
 
   render() {
     // this will be the template to hold the comment
+    console.log('whats this.state.comment is: ', this.state.comments)
     return (
       // need a form component to allow user to input comment
       <div>
-        <Container>
-          <h1 className="display-5">Comment</h1>
+          <h3>Comment</h3>
           <Form onSubmit={this.handleCommentSubmit}>
-            <FormGroup>
+            <FormGroup row>
               <Label for="comment"></Label>
-              <Row>
-              <Col sm={11}>
-              <Input onChange={e => this.setState({ comment: e.target.value })} type="text" name="comment" id="comment" placeholder="Enter a comment here" value={this.state.comment}/>
+              <Col>
+              <Input onChange={e => this.setState({ comment: e.target.value })} type="text" name="comment" id="comment" placeholder="Enter here" value={this.state.comment}/>
               </Col>
-              <Button>Submit</Button>
-              </Row>
+              <Button className="mr-3">Submit</Button>
             </FormGroup>
           </Form>
         <ListGroup>
@@ -97,12 +95,11 @@ class Comments extends Component {
               return <li key={comment.id}>{comment.comment}</li>
             })}
           </ul>
-          </ListGroupItem> */}
+          </ListGroupItem> */} 
             {this.state.comments.map(comment => {
-              return <ListGroupItem key={comment.id}>{comment.comment} </ListGroupItem>
+              return <ListGroupItem key={comment.id}>{comment.user.username}{comment.created_at} {comment.comment}</ListGroupItem>
             })}
         </ListGroup>
-        </Container>
       </div>
     )
   }

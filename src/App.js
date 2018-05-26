@@ -8,7 +8,6 @@ import {
 // App Components
 import Header from './components/Header';
 import Home from './components/Home';
-import About from './components/About';
 import Experiences from './components/Experiences';
 import Featured from './components/Featured';
 import Signup from './components/Signup';
@@ -28,7 +27,6 @@ export default class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
           <Route exact path="/experiences" component={Experiences} />
           <Route exact path="/experiences/:id" component={Featured} />
           <Route exact path="/signup" component={Signup} />

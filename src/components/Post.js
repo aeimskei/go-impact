@@ -4,6 +4,8 @@ import {
   Form,
   FormGroup,
   Label,
+  Jumbotron,
+  Container,
   Input
  } from 'reactstrap';
 import decode from 'jwt-decode';
@@ -14,6 +16,7 @@ class Post extends Component {
     user_id: '',
     name: '',
     address: '',
+    subtext: '',
     description: '',
     url: '',
     imageUrl: '',
@@ -81,8 +84,13 @@ class Post extends Component {
   render() {
     return (
       <div>
+        <Jumbotron>
+          <Container>
+          <h1 className="display-3">Post a location</h1>
+          <p className="lead">Share an experience that has not been listed, so folks can help support more awesome socially concious experiences</p>
+          </Container>
+        </Jumbotron>
         <div className="container">
-        <h1 className="display-3">Post an Experience</h1>
           <Form onSubmit={this.handleSubmit}>  
             <FormGroup>
               <Label for="name">Location Name</Label>
@@ -94,6 +102,10 @@ class Post extends Component {
                 id="name"
                 placeholder="location name" 
               />
+            </FormGroup>
+            <FormGroup>
+              <Label for="subtext">Subtext</Label>
+              <Input onChange={e => this.setState({description: e.target.value})}type="subtext" name="subtext" id="subtext" placeholder="short description for experience card" />
             </FormGroup>
             <FormGroup>
               <Label for="description">Description</Label>
