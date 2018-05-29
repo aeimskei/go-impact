@@ -19,8 +19,10 @@ import {
 } from 'reactstrap';
 import ExperienceCard from './ExperienceCard';
 import SearchForm from './SearchForm';
+import ExperienceList from './ExperienceList';
+import Header from './Header';
 
-class Experiences extends Component {
+class ExperiencePage extends Component {
 
   state = {
     experiences: []
@@ -37,33 +39,35 @@ class Experiences extends Component {
     // console.log('Whats response in componenWillMount: ', response)
     const experiences = await responseExperience.json()
 
-    console.log('experiences is: ', experiences);
+    // console.log('experiences is: ', experiences);
     
     
     this.setState({
       // experiences: this.props.history.location.state.result
-      experiences: experiences.result
+      experiences: experiences.result,
+      trueExp: experiences.result
     })
   }
 
 
   onSearchChange = e => {
+
     this.setState({
-      experiences: this.props.history.location.state.result.filter(experience => experience.city.toLowerCase().includes(e.target.value.toLowerCase()))
+      experiences: this.state.trueExp.filter(experience => experience.city.toLowerCase().includes(e.target.value.toLowerCase()))
     });
-    console.log('whats this.state.searchCity: ', this.state.searchCity);
     
   }
   
   render() {
-  console.log('this.props in expereince', this.props);
+  console.log('this.state.experiences in expereince', this.state.experiences);
 
     // console.log('Whats this.state now: ', this.state.experience[0]);
     // let {imageUrl} = this.state.experience;
-    console.log('whats props history in experiences: ', this.props.history);
+    // console.log('whats props history in experiences: ', this.props.history);
     
     return (
       <div>
+        <Header />
         <Jumbotron fluid>
           <Container>
             <h1 className="display-4">Explore</h1>
@@ -74,20 +78,13 @@ class Experiences extends Component {
               <Input onChange={this.onSearchChange} type="search" name="search" id="search" placeholder="Search by city..." />
               </Col>
               <Button className="mr-3">Submit</Button>
-            </FormGroup>
+            </FormGroup> 
           </Container>
         </Jumbotron>
-        <Container>
-          <Row>
-            {this.state.experiences.map(experience => {
-              // return <ExperienceCard imageUrl={experience.imageUrl} name={experience.name} description={experience.description} experienceId={experience.id}/>
-              return <ExperienceCard history={this.props.history} key={experience.id} experience={experience}/>
-            })}
-          </Row>
-        </Container>
+        <ExperienceList onlyUser={false} experiences={this.state.experiences} history={this.props.history}/>
       </div>
     )
   }
 }
 
-export default Experiences;
+export default ExperiencePage;

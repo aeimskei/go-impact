@@ -19,10 +19,10 @@ class ExperienceCard extends Component {
     url: ''
   }
 
-  componentWillMount = () => {
-    console.log('Whats being logged out for this.props in expCard', this.props);
+  // componentWillMount = () => {
+  //   console.log('Whats being logged out for this.props in expCard', this.props);
     
-  }
+  // }
 
   handleLearnMore = async (e) => {
     const {id} = this.props.experience
@@ -38,7 +38,7 @@ class ExperienceCard extends Component {
 
   render() {
 
-    const {imageUrl, name, subtext, description, url} = this.props.experience
+    const {id, imageUrl, name, subtext, description, url} = this.props.experience
     return (
     <Col lg="4" className="mb-3">
       <Card body>
@@ -46,6 +46,19 @@ class ExperienceCard extends Component {
         <CardTitle className="mt-3">{name}</CardTitle>
         <CardText>{subtext}</CardText>
         <Button onClick={this.handleLearnMore}>Learn more</Button>
+        <br />
+        {/* this.props.onlyUser
+        true: show delete button
+        false: show null
+        */}
+        {
+          this.props.onlyUser ? (
+            <Button onClick={() => this.props.handleDelete(id)}>Delete</Button>
+          ) : (
+            null
+          )
+        }
+        
       </Card>
     </Col>
     )

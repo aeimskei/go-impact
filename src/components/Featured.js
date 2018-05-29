@@ -7,6 +7,7 @@ import {
   Button} from 'reactstrap';
 import Comments from './Comments';
 import LocationMap from './LocationMap';
+import Header from './Header';
 
 
 class Featured extends Component {
@@ -37,6 +38,7 @@ class Featured extends Component {
 
     return (
       <div>
+        <Header />
         <Jumbotron fluid>
           <Container>
           <h1 className="display-4">Their Social Impact Story</h1>

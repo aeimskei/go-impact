@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { 
-  Container,
   Label, 
   Input, 
   Form, 
@@ -8,13 +7,10 @@ import {
   ListGroup, 
   ListGroupItem, 
   Button,
-  Row, 
   Col } from 'reactstrap';
 import decode from 'jwt-decode';
 
 class Comments extends Component {
-
-  // need to fetch getAll comment for associated user and experience
   
   state = {
     user_id: '',
@@ -29,8 +25,19 @@ class Comments extends Component {
     })
     const allComments = await response.json()
 
-    console.log('whats allComments: ', allComments);
-    
+    // console.log('whats allComments: ', allComments);
+
+    let token = localStorage.getItem("user")
+
+    if (token) {
+      this.setState({
+        loggedIn: decode(token).loggedIn
+      })
+    } else {
+      this.setState({
+        loggedIn: false
+      })
+    }
 
     this.setState({
       comments: [...this.state.comments, ...allComments.filter(comment => comment.experience_id === this.props.experience)]
@@ -49,8 +56,8 @@ class Comments extends Component {
     console.log('this.state.experience_id = ', this.props.experience);
     
 
-    // console.log('these are the states of each state ', this.state);
-    // console.log('result ', result);
+    // console.log('state in Comments ===> ', this.state);
+    // console.log('result in Comments ===> ', result);
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/comments`, {
         method: "POST",
@@ -73,12 +80,12 @@ class Comments extends Component {
   }
 
   render() {
-    // this will be the template to hold the comment
     console.log('whats this.state.comment is: ', this.state.comments)
     return (
-      // need a form component to allow user to input comment
       <div>
           <h3>Comment</h3>
+          {/* hide form if user is not logged in */}
+          { this.state.loggedIn ? (     
           <Form onSubmit={this.handleCommentSubmit}>
             <FormGroup row>
               <Label for="comment"></Label>
@@ -87,17 +94,13 @@ class Comments extends Component {
               </Col>
               <Button className="mr-3">Submit</Button>
             </FormGroup>
-          </Form>
+          </Form> 
+          ) : (
+            null
+          )}
         <ListGroup>
-          {/* <ListGroupItem>
-          <ul>
             {this.state.comments.map(comment => {
-              return <li key={comment.id}>{comment.comment}</li>
-            })}
-          </ul>
-          </ListGroupItem> */} 
-            {this.state.comments.map(comment => {
-              return <ListGroupItem key={comment.id}>{comment.user.username}{comment.created_at} {comment.comment}</ListGroupItem>
+              return <ListGroupItem key={comment.id}>{comment.user.username} {comment.created_at} {comment.comment}</ListGroupItem>
             })}
         </ListGroup>
       </div>

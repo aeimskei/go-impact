@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Jumbotron, Container, Button, Row, Col} from 'reactstrap';
+import { Jumbotron, Container, Row, Col} from 'reactstrap';
+import Header from './Header';
 
 class Home extends Component {
 
   render() {
     return (
       <div>
+        <Header />
         <Jumbotron fluid>
           <Container>
           <h1 className="display-4">Experience Social Impact</h1>
