@@ -4,8 +4,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Jumbotron,
+  Container
  } from 'reactstrap';
+ import Header from './Header';
 
 class Signup extends Component {
 
@@ -40,6 +43,13 @@ class Signup extends Component {
   render() {
     return (
       <div>
+      <Header/>
+        <Jumbotron fluid>
+          <Container>
+          <h1 className="display-4">Signup</h1>
+          <p className="lead">To contribute, post new locations and comment. </p>
+          </Container>
+        </Jumbotron>
         <div className="container">
           <Form onSubmit={this.handleSubmit}>  
             <FormGroup>

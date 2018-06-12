@@ -82,8 +82,13 @@ class Comments extends Component {
   render() {
     console.log('whats this.state.comment is: ', this.state.comments)
     return (
-      <div>
+      <div className="mt-5">
+          {
+          this.state.loggedIn ? (
           <h3>Comment</h3>
+          ) : (
+            null
+          )}
           {/* hide form if user is not logged in */}
           { this.state.loggedIn ? (     
           <Form onSubmit={this.handleCommentSubmit}>
@@ -100,7 +105,8 @@ class Comments extends Component {
           )}
         <ListGroup>
             {this.state.comments.map(comment => {
-              return <ListGroupItem key={comment.id}>{comment.user.username} {comment.created_at} {comment.comment}</ListGroupItem>
+              // return <ListGroupItem key={comment.id}>{comment.user.username} {comment.created_at} {comment.comment}</ListGroupItem>
+              return <ListGroupItem key={comment.id}><strong>{comment.user.username}</strong><br/>{comment.comment}</ListGroupItem>
             })}
         </ListGroup>
       </div>

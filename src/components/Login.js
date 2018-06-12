@@ -4,8 +4,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Container,
+  Jumbotron
  } from 'reactstrap';
+ import Header from './Header';
 
 class Login extends Component {
 
@@ -44,14 +47,21 @@ class Login extends Component {
       // console.log('Whats response in componenWillMount: ', response)
       const experiences = await responseExperience.json()
       // this.props.history.push("/experiences", experiences)
-      this.props.history.push("/")
+      this.props.history.push("/experiences")
     }
   }
 
   render() {
     return (
       <div>
-        <div className="container">
+        <Header/>
+        <Jumbotron fluid>
+          <Container>
+          <h1 className="display-4">Login</h1>
+          <p className="lead">To contribute, post new locations and comment. </p>
+          </Container>
+        </Jumbotron>
+        <Container>
           <Form onSubmit={this.handleSubmit}>  
             <FormGroup>
               <Label for="email">Email</Label>
@@ -63,7 +73,7 @@ class Login extends Component {
             </FormGroup>
             <Button>Submit</Button>
           </Form>
-        </div>
+        </Container>
       </div>
     )
   }

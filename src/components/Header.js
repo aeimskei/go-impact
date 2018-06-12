@@ -25,6 +25,10 @@ export default class Example extends React.Component {
     });
   }
 
+  logout() {
+    localStorage.removeItem("user")
+  }
+
   componentDidMount() {
 
     // console.log('componentDidMount');
@@ -46,7 +50,7 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">SocialEnterprise</NavbarBrand>
+          <NavbarBrand href="/">Social-Impact</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -56,9 +60,9 @@ export default class Example extends React.Component {
               <NavItem>
                 <NavLink href="/experiences">Experiences</NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="/post">Add New Experience</NavLink>
-              </NavItem>
+              </NavItem> */}
               {
                 this.state.loggedIn ? (
                   <NavItem>
@@ -68,12 +72,30 @@ export default class Example extends React.Component {
                   null
                 )
               }
+              {
+                this.state.loggedIn ? (
+                  <NavItem>
+                    <NavLink href="/post">Add New</NavLink>
+                  </NavItem>
+                ) : (
+                  null
+                )
+              }
+              
               <NavItem>
                 <NavLink href="/login">Login</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/">Signout</NavLink>
-              </NavItem>
+
+              {
+                this.state.loggedIn ? (
+                <NavItem>
+                  <NavLink href="/" onClick={this.logout}>Logout</NavLink>
+                </NavItem>
+              ) : (
+                  null
+                )
+              }
+              
               <NavItem>
                 <NavLink href="/signup">Signup</NavLink>
               </NavItem>

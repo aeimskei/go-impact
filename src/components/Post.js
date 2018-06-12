@@ -9,6 +9,7 @@ import {
   Input
  } from 'reactstrap';
 import decode from 'jwt-decode';
+import Header from './Header';
 
 class Post extends Component {
 
@@ -84,6 +85,7 @@ class Post extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Jumbotron>
           <Container>
           <h1 className="display-3">Post a location</h1>

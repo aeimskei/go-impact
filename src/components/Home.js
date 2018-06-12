@@ -11,12 +11,12 @@ class Home extends Component {
         <Jumbotron fluid>
           <Container>
           <h1 className="display-4">Experience Social Impact</h1>
-          <p className="lead">Explore the Bay Area with purpose and meaning. </p>
+          <p className="lead">Explore with purpose and meaning. </p>
           </Container>
         </Jumbotron>
 
        <Container>
-          <Row>
+          {/* <Row>
             <Col sm="4">
               <p className="lead"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.In egestas tellus justo, et tristique lacus volutpat sed.</p>
             </Col>
@@ -26,11 +26,17 @@ class Home extends Component {
             <Col sm="4">
               <p className="lead"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.In egestas tellus justo, et tristique lacus volutpat sed.</p>
             </Col>
-          </Row>
+          </Row> */}
           <br />
           <Row>
             <div className="col">
-              <p className="lead"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.In egestas tellus justo, et tristique lacus volutpat sed.Maecenas gravida sapien non lectus sodales, at tristique purus malesuada.Vivamus finibus metus sed elit efficitur, non ultrices est fringilla.Pellentesque congue vel libero in aliquet.Donec hendrerit erat non nibh rhoncus bibendum.Phasellus lectus sapien, bibendum non purus et, porta dignissim erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p className="lead">This is an experimental project to have people post locations of social enterprises that the find as the they travel. This project is a small stepping stone to create a database of these locations. Please feel free to contribute with places you have visited. I hope this project will expand to something more, just a small start for now.</p>
+              <p className="lead">
+              A social enterprises is a hybrid of a non - profit / NGO and private.A self - sustaining business model that’ s mission driven.
+              </p>
+              <p className="lead">
+              To explore, click on the Experience tab on the navigation bar to see some listed social enterprises.
+              </p>
             </div>
           </Row>
         </Container>

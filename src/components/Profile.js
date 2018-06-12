@@ -51,7 +51,7 @@ class Profile extends Component {
         <Header />
         <Jumbotron fluid>
           <Container>
-          <h1 className="display-4">Hello, User Name</h1>
+          <h1 className="display-4">Hello there</h1>
           <p className="lead">Feel free to make changes to your post here.</p>
           </Container>
         </Jumbotron>
