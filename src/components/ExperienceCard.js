@@ -42,7 +42,7 @@ class ExperienceCard extends Component {
     return (
     <Col lg="4" className="mb-3">
       <Card body>
-        <img width="100%" src={imageUrl} alt="Image of Location" />
+        <img width="360" height="215" class="card-img-top" src={imageUrl} alt="Image of Location" />
         <CardTitle className="mt-3">{name}</CardTitle>
         <CardText>{subtext}</CardText>
         <Button className="mb-1" onClick={this.handleLearnMore}>Learn more</Button>
