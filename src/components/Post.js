@@ -28,7 +28,7 @@ class Post extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
-    // console.log(this.state.username, this.state.email, this.state.password)
+    // console.log(this.state.username, this.state.subtext, this.state.email, this.state.password)
     if (!this.state.name || !this.state.description || !this.state.url || !this.state.imageUrl) {
       alert('All field must be filled')
     } else {
@@ -47,8 +47,8 @@ class Post extends Component {
         longitude: result.results[0].geometry.location.lng
       })
 
-      console.log('these are the states of each state ', this.state);
-      console.log('result ', result);
+      // console.log('these are the states of each state ', this.state);
+      // console.log('result ', result);
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/experience`, {
         method: "POST",
@@ -107,7 +107,7 @@ class Post extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="subtext">Subtext</Label>
-              <Input onChange={e => this.setState({description: e.target.value})}type="subtext" name="subtext" id="subtext" placeholder="short description for experience card" />
+              <Input onChange={e => this.setState({subtext: e.target.value})}type="subtext" name="subtext" id="subtext" placeholder="short description for experience card" />
             </FormGroup>
             <FormGroup>
               <Label for="description">Description</Label>
@@ -115,7 +115,7 @@ class Post extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="url">Website</Label>
-              <Input onChange={e => this.setState({url: e.target.value})}type="url" name="url" id="url" placeholder="website url" />
+              <Input onChange={e => this.setState({url: e.target.value})} type="url" name="url" id="url" placeholder="website url" />
             </FormGroup>
             <FormGroup>
               <Label for="imageUrl">Image</Label>

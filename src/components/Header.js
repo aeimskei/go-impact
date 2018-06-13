@@ -82,9 +82,15 @@ export default class Example extends React.Component {
                 )
               }
               
-              <NavItem>
-                <NavLink href="/login">Login</NavLink>
-              </NavItem>
+              {
+                this.state.loggedIn ? (
+                  null
+                ) : (
+                <NavItem>
+                  <NavLink href="/login">Login</NavLink>
+                </NavItem>
+                )
+              }
 
               {
                 this.state.loggedIn ? (
@@ -96,9 +102,15 @@ export default class Example extends React.Component {
                 )
               }
               
-              <NavItem>
-                <NavLink href="/signup">Signup</NavLink>
-              </NavItem>
+              {
+                this.state.loggedIn ? (
+                  null
+                ) : (
+                <NavItem>
+                  <NavLink href="/signup">Signup</NavLink>
+                </NavItem>
+                )
+              }
             </Nav>
           </Collapse>
         </Navbar>

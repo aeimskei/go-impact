@@ -45,15 +45,14 @@ class ExperienceCard extends Component {
         <img width="100%" src={imageUrl} alt="Image of Location" />
         <CardTitle className="mt-3">{name}</CardTitle>
         <CardText>{subtext}</CardText>
-        <Button onClick={this.handleLearnMore}>Learn more</Button>
-        <br />
+        <Button className="mb-1" onClick={this.handleLearnMore}>Learn more</Button>
         {/* this.props.onlyUser
         true: show delete button
         false: show null
         */}
         {
           this.props.onlyUser ? (
-            <Button onClick={() => this.props.handleDelete(id)}>Delete</Button>
+            <Button color="danger" onClick={() => this.props.handleDelete(id)}>Delete</Button>
           ) : (
             null
           )
