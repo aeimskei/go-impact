@@ -37,6 +37,7 @@ class Signup extends Component {
       })
       const newUser = await response.json()
       console.log('newUser id what: ', newUser);
+      this.props.history.push("/experiences")
     }
   }
 
